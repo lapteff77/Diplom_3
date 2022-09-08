@@ -4,32 +4,34 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
+
 public class ProfilePage {
 
     // локатор лого
     @FindBy(how = How.XPATH, using = "//div[@class='AppHeader_header__logo__2D0X2']")
-    private SelenideElement clockLogoInProfile;
+    static SelenideElement logoStellar;
 
     // локатор кнопки "Конструктор"
     @FindBy(how = How.XPATH, using = "//p[@class='AppHeader_header__linkText__3q_va ml-2']")
-    private SelenideElement enterConstructorInProfile;
+    static SelenideElement buttonKonstruktor;
 
     // локатор кнопки "Выxoд"
     @FindBy(how = How.XPATH, using = "//button[@class='Account_button__14Yp3 text text_type_main-medium text_color_inactive']")
-    private SelenideElement exitProfile;
+    private SelenideElement exitProfil;
 
-
-
-    public void clickLogoInProfile() {
-        clockLogoInProfile.click();
+    public static void clickLogoInProfile() {
+        $(byXpath("//div[@class='AppHeader_header__logo__2D0X2']")).shouldBe(visible).click();
     }
 
-    public void clickConstructorInProfile() {
+    public static void clickConstructorInProfile() {
 
-        enterConstructorInProfile.click();
+        $(byXpath("//p[@class='AppHeader_header__linkText__3q_va ml-2']")).shouldBe(visible).click();
     }
 
-    public void clickExitProfile() {
-        exitProfile.click();
+    public static void clickExitProfile() {
+        $(byXpath("//button[@class='Account_button__14Yp3 text text_type_main-medium text_color_inactive']")).shouldBe(visible).click();
     }
 }

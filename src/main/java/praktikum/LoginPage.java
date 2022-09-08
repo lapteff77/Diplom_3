@@ -7,8 +7,6 @@ import org.openqa.selenium.support.How;
 
 public class LoginPage {
 
-    // поле ввода e-mail
-    //@FindBy(how = How.NAME,using = "name")
     @FindBy(how = How.XPATH, using = "//fieldset[1]/div/div/input")
     private SelenideElement inPostEmail;
 

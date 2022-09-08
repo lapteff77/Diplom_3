@@ -27,24 +27,7 @@ public class NovUserRegPage {
     private SelenideElement enterRNovRegButton;
 
     @FindBy(how = How.XPATH, using = "//p[@class='input__error text_type_main-default']")
-    private SelenideElement allertIncorrectPass;
-
-
-    public void setNovRegName(String name) {
-        inNovName.setValue(name);
-    }
-
-    public void setNovRegEmail(String email) {
-        inNovEmail.setValue(email);
-    }
-
-    public void setNovRegPassword(String password) {
-        inNovPassword.setValue(password);
-    }
-
-    public void enterRegNovButton() {
-        enterRNovRegButton.click();
-    }
+    static SelenideElement allertIncorrectPass;
 
     public void novUserRegistration(String name, String email, String password) {
         inNovName.sendKeys(Keys.CONTROL + "A");
@@ -58,5 +41,4 @@ public class NovUserRegPage {
         inNovPassword.setValue(password);
         enterRNovRegButton.click();
     }
-
 }

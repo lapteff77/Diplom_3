@@ -12,7 +12,6 @@ public class ForgotPasswordPage {
     private SelenideElement inForgotEmail;
 
     // кнопка  "восстановить/сохранить"
-
     @FindBy(how = How.XPATH, using = "//button[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa']")
     private SelenideElement inReplace;
 
