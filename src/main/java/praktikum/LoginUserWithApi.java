@@ -8,6 +8,7 @@ public class LoginUserWithApi {
     private String password;
     private String name;
     private static String token;
+    private static int actualCode;
     private static final int expectedCodeForOk = 200;
     private static final int expectedCodeForSetOver = 202;
 
@@ -68,5 +69,39 @@ public class LoginUserWithApi {
                 .then()
                 .log().all()
                 .statusCode(expectedCodeForSetOver);
+    }
+
+    public static void userRegBedCreate(LoginUserWithApi loginUserWithApiReg) {
+        // перед началом теста необходимо заполнение уникальными значениями для login password name
+        actualCode = given()
+                .header("Content-type", "application/json")
+                .and()
+                .body(loginUserWithApiReg)
+                .when()
+                .post(AdressForUrl.urlApiLogin)
+                .then()
+                .log().all()
+                .extract()
+                .statusCode();
+    }
+
+    public static void noExpectedActualCode(LoginUserWithApi loginUserWithApiReg) {
+        if (actualCode == expectedCodeForOk) {
+            token = given()
+                    .header("Content-type", "application/json")
+                    .and()
+                    .body(loginUserWithApiReg)
+                    .when()
+                    .post(AdressForUrl.urlApiLogin)
+                    .then()
+                    .log().all()
+                    .extract()
+                    .body()
+                    .path("accessToken");
+            given()
+                    .auth()
+                    .oauth2(token.replace("Bearer ", ""))
+                    .delete(AdressForUrl.urlApiUser);
+        }
     }
 }

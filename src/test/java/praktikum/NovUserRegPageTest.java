@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import java.util.Random;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverConditions.url;
 
@@ -24,6 +23,7 @@ public class NovUserRegPageTest {
 
     @After
     public void closeBrowser() {
+        LoginUserWithApi.setOver(email, password);
         Selenide.closeWebDriver();
     }
 
@@ -37,19 +37,5 @@ public class NovUserRegPageTest {
                 NovUserRegPage.class);
         novUserRegPage.novUserRegistration(name, email, password);
         webdriver().shouldHave(url(AdressForUrl.urlLogin));
-        LoginUserWithApi.setOver(email, password);
-    }
-
-    @Test
-    // тест в Chrome browser
-    // Регистрация нового пользователя (неуспешная, короткий пароль)
-    @DisplayName("chromeNSucPassField") // имя теста
-    @Description("chrome -  registering a new user with incorrect pass") // описание теста
-    public void chromeNSucPassField() {
-        novUserRegPage = open(AdressForUrl.urlRegister,
-                NovUserRegPage.class);
-        novUserRegPage.novUserRegistration(name, email, noCorrectPassword);
-        webdriver().shouldHave(url(AdressForUrl.urlRegister));
-        NovUserRegPage.allertIncorrectPass.shouldBe(visible);
     }
 }
